@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>我的任务</title>
+<script src="http://tu.hangtian123.net/12306SearchMonitor/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		
+		/**tab切换代码*/
+		//默认动作
+		$(".data").hide();//将所有的div进行隐藏
+		//选项卡第一个被激活
+		$("#tab ul li:first").addClass("active");
+		//显示第一个选项卡里面的内容
+		$("#datatable").show();
+		//点击事件
+		$("#tab ul li").on('click',function(){
+			//默认动作
+			$(".data").hide();//将所有的div进行隐藏
+			$("#tab ul li").removeClass("active");
+			$(this).addClass("active");
+			var  activeTab=$(this).find("a").attr("href");
+			$(activeTab).fadeIn();
+			return false;
+		});
+		/**tab切换代码*/
+		/**窗口关闭*/
+		$("#intoPieces a ").on('click',function(){
+			$("#intoPieces").hide();	
+		});
+		$("#datatable table tr:eq(1) td:eq(2)").find("a").on("click",function(){
+			$("#intoPieces").show();	
+		});
+		
+	});
+</script>
+<style type="text/css">
+body {
+	background-color: #fff;
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#container {
+	position: relative;
+	margin: 0px auto 0px auto;
+	width: 780px;
+}
+#menu{
+	width: 100%;
+	height:37px;
+	margin-left:-18px;
+}
+#menu ul {
+	list-style: none;
+}
+
+#menu ul li {
+	float: left;
+	text-align: center;
+	width: 104px;
+	border: 1px solid black;
+	margin-left: -1px; /**边框重合*/
+}
+
+#menu a {
+	display: block;
+	padding: 9px 6px 11px 6px;
+}
+
+#tab {
+	clear: left;
+	padding-top: 10px;
+	margin-left: -24px;
+}
+
+#tab ul {
+	list-style: none;
+}
+
+#tab ul li {
+	float: left;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 5px; /**边框重合*/
+	padding: 2px 6px 5px 6px;
+}
+#tab ul li a{
+	text-decoration: none;
+}
+
+#datatable {
+	padding-top:20px;
+	clear: left;
+	margin-left: 20px;
+	display: none;
+	width: 780px;
+}
+
+#datatable table {
+	border: 1;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	}
+table td{
+	padding: 0;
+}
+#datatable table tr td{
+	padding: 6px 3px;
+	text-align: center;
+}
+#datatable table tr th{
+	padding: 6px 6px;
+	background-color: #CDCDCD;
+}
+
+#pagnation{
+	margin-top:50px;
+	margin-left: 20px;
+}
+#pagnation p{
+	float:left;
+}
+.pageHtml{
+	margin-left: 520px;
+}
+#warning{
+padding-top:20px;	
+	clear:left;
+	margin-left: 20px;
+	display: none;
+}
+#warning table{
+	border: 1;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+#warning table tr td{
+	padding: 6px 32px;
+	text-align: center;
+}
+#warning table tr th{
+	padding: 6px 37px;
+	background-color: #CDCDCD;
+}
+.active{
+	background-color: #EAEAEA;
+}
+
+
+#notice{
+padding-top:20px;	
+	clear:left;
+	margin-left: 20px;
+	display: none;
+}
+#notice table{
+	border: 1;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+#notice table tr td{
+text-align: center;
+	padding: 6px 24.5px;
+}
+#notice table tr th{
+	padding: 6px 26px;
+	background-color: #CDCDCD;
+}
+#intoPieces{
+	display:none;
+	position: absolute;
+	border:1px solid black;
+	left:13%;
+	top:40%;
+	background-color: #CCCCCC;
+	width: 636px;
+	height: 200px;
+	border-radius: 5px;
+}
+
+#intoPieces table{
+	border: 1;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	clear:left;
+	margin:50px 50px 0px 50px;
+	background-color: #fff;
+}
+
+#intoPieces table tr td{
+text-align: center;
+	padding: 2px 1px;
+}
+#intoPieces table tr th{
+	padding: 2px 0.5px;
+}
+#intoPieces h3{
+	margin:20px 0px 0px 50px;
+	margin-top:20px;
+	padding:0px;
+	float:left;
+}
+#intoPieces a{
+margin-top:20px;
+	float:right;
+	padding-right: 60px;
+}
+</style>
+</head>
+<body>
+	<!-- 容器 -->
+	<div id="container">
+		<!-- 菜单 -->
+		<div id="menu">
+			<ul>
+				<li><a>我的任务</a></li>
+				<li><a>客户管理</a></li>
+				<li><a>合作方管理</a></li>
+				<li><a>业务办理</a></li>
+				<li><a>货后管理</a></li>
+				<li><a>风险管理</a></li>
+				<li><a>系统设置</a></li>
+			</ul>
+		</div>
+		<!-- tab -->
+		<div id="tab">
+			<ul>
+				<li><a href="#datatable">待办任务</a></li>
+				<li><a href="#warning">预警</a></li>
+				<li><a href="#notice">公告</a></li>
+			</ul>
+		</div>
+		<!-- 表格 -->
+		<div id="datatable" class="data">
+			<table border="1">
+				<tr>
+					<th>序号</th>
+					<th>当前节点</th>
+					<th>进件编号</th>
+					<th>进件日期</th>
+					<th>申请时长</th>
+					<th>产品类型</th>
+					<th>产品名称</th>
+					<th>客户名称</th>
+					<th>发起人</th>
+					<th>申请贷款金额</th>
+					<th>流程标识</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td><a href="javascript:void(0);" onclick="alert('跳转到相关业务环节的办理');">文档审核</a></td>
+					<td><a href="javascript:void(0);">KH0001</a></td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户一</td>
+					<td>客户经理1</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户二</td>
+					<td>客户经理2</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户三</td>
+					<td>客户经理3</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户四</td>
+					<td>客户经理4</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户五</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户六</td>
+					<td>客户经理6</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户七</td>
+					<td>客户经理7</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户八</td>
+					<td>客户经理8</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- 表格2 -->
+		<div id="warning" class="data">
+			<table border="1">
+				<tr>
+					<th>序号</th>
+					<th>事项</th>
+					<th>发送人</th>
+					<th>要求完成时间</th>
+					<th>紧急程度</th>
+					<th>备注</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+			</table>
+		</div>
+			<!-- 表格3 -->
+		<div id="notice" class="data">
+			<table border="1">
+				<tr>
+					<th>序号</th>
+					<th>发送人</th>
+					<th>时间</th>
+					<th>状态</th>
+					<th>类型</th>
+					<th>消息</th>
+					<th>事项</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>2016-01-01</td>
+					<td>5天4小时45分</td>
+					<td>贷款申请</td>
+				</tr>
+			</table>
+		</div>
+		<!-- 分页 -->
+		<div id="pagnation">
+			<p>共1页，7条记录</p>
+			<p class="pageHtml">
+				<span>上一页</span> <span style="border-left: none;"> 1</span> <span
+					style="border-left: none;">下一页</span>
+			</p>
+		</div>
+		
+		<!-- 漂浮起来的页面 -->
+		<div id="intoPieces">
+				<h3>进件编号：KH0001</h3>
+				<a href="javascript:void(0);">关闭</a>
+				<table border="1">
+					<tr>
+						<th>序号</th>
+						<th>办理环节</th>
+						<th>接收时间</th>
+						<th>完成时间</th>
+						<th>办理人</th>
+						<th>办理部门</th>
+						<th>审批状态</th>
+						<th>审批意见</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>申请登记</td>
+						<td>2016-01-01  12：00:00</td>
+						<td>2016-01-02  11:00:00</td>
+						<td>小王</td>
+						<td>机构1</td>
+						<td>通过</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>申请登记</td>
+						<td>2016-01-01  12：00:00</td>
+						<td>2016-01-02  11:00:00</td>
+						<td>小王</td>
+						<td>机构1</td>
+						<td>通过</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>申请登记</td>
+						<td>2016-01-01  12：00:00</td>
+						<td>2016-01-02  11:00:00</td>
+						<td>小王</td>
+						<td>机构1</td>
+						<td>通过</td>
+						<td>1</td>
+					</tr>
+						<tr>
+						<td>1</td>
+						<td>申请登记</td>
+						<td>2016-01-01  12：00:00</td>
+						<td>2016-01-02  11:00:00</td>
+						<td>小王</td>
+						<td>机构1</td>
+						<td>通过</td>
+						<td>1</td>
+					</tr>
+						<tr>
+						<td>1</td>
+						<td>申请登记</td>
+						<td>2016-01-01  12：00:00</td>
+						<td>2016-01-02  11:00:00</td>
+						<td>小王</td>
+						<td>机构1</td>
+						<td>通过</td>
+						<td>1</td>
+					</tr>
+						<tr>
+						<td>1</td>
+						<td>申请登记</td>
+						<td>2016-01-01  12：00:00</td>
+						<td>2016-01-02  11:00:00</td>
+						<td>小王</td>
+						<td>机构1</td>
+						<td>通过</td>
+						<td>1</td>
+					</tr>
+				</table>
+		</div>
+	</div>
+</body>
+</html>

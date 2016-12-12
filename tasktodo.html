@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>待办任务列表</title>
+<script language="javascript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<style>
+body {
+	background-color: #fff;
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#container {
+	position: relative;
+	margin: 0px auto 0px auto;
+	width: 780px;
+}
+#menu{
+	width: 100%;
+	height:37px;
+	margin-left:-18px;
+}
+#menu ul {
+	list-style: none;
+}
+
+#menu ul li {
+	float: left;
+	text-align: center;
+	width: 104px;
+	border: 1px solid black;
+	margin-left: -1px; /**边框重合*/
+}
+
+#menu a {
+	display: block;
+	padding: 9px 6px 11px 6px;
+}
+
+#queryForm{
+	clear: left;
+	padding-top: 10px;
+	margin-left: 20px;
+
+}
+#toDoTaskList table {
+	width:100%;
+	border: 1;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	}
+#toDoTaskList table td{
+	padding: 0;
+}
+#toDoTaskList{
+	clear: left;
+	padding-top: 10px;
+	margin-left: 20px;
+
+}
+
+#pagnation{
+	margin-top:50px;
+	margin-left: 20px;
+}
+#pagnation p{
+	float:left;
+}
+.pageHtml{
+	margin-left: 520px;
+}
+</style>
+
+</head>
+<body>
+		<!-- 容器 -->
+	<div id="container">
+		<!-- 菜单 -->
+		<div id="menu">
+			<ul>
+				<li><a>我的任务</a></li>
+				<li><a>客户管理</a></li>
+				<li><a>合作方管理</a></li>
+				<li><a>业务办理</a></li>
+				<li><a>货后管理</a></li>
+				<li><a>风险管理</a></li>
+				<li><a>系统设置</a></li>
+			</ul>
+		</div>
+		
+		<!--查询条件-->
+		<div  id="queryForm">
+			 <fieldset style="width:712px;">  
+				   <legend>条件查询</legend> 
+				  
+				<form>	
+				<table>	
+					<tr>
+						<td><span>高级查询</span></td>
+						<td>
+							 <select>
+								<option>所有条件</option>
+								<option>进件编码</option>
+								<option>产品类型</option>
+								<option>产品名称</option>
+								<option>客户名称</option>
+								<option>发起人</option>
+							</select>
+					  </td>
+						<td> <input name=""/></td>
+						<td><input type="button" value="查询"/></td>
+						<td><input type="reset" value="重置"/></td>
+					</tr>		  
+				   </table>
+				  <hr/>
+				  <table>	
+					<tr>
+						
+						<td>进件编码：</td>
+						<td><input type="text"/></td>
+						<td>  产品类型：</td>
+						<td><input type="text"/></td>
+						<td>产品名称：</td>
+						<td> <input type="text"/></td>
+					</tr>
+					 <tr>
+						
+						<td>客户名称：</td>
+						<td><input type="text"/></td>
+						<td>发起人：</td>
+						<td><input type="text"/></td>
+						<td>合作机构：</td>
+						<td><select><option>非数据库查询机构</option></select></td>
+					 </tr>
+					 <tr>
+						<td> 进件时间：</td>
+						<td><input type="text" onClick="WdatePicker()"/></td>
+						<td>至</td>
+						<td><input type="text" onClick="WdatePicker()"/></td>
+					 </tr> 
+				  </table>
+				</form>	
+			</fieldset>  	
+		</div>
+		<!--待办任务列表-->
+		<div id="toDoTaskList">
+			<fieldset style="width:712px;">
+				<legend>待办任务列表</legend>
+			<table  border="1">
+				<tr>
+				<th>
+					序号
+				</th>
+				<th>
+					当前节点
+				</th>
+				<th>
+					进件编号
+				</th>
+				<th>
+					进件日期
+				</th>
+				<th>
+					申请时长
+				</th>
+				<th>
+					产品类型
+				</th>
+				<th>
+					产品名称
+				</th>
+				<th>
+					客户名称
+				</th>
+				<th>
+					发起人
+				</th>
+				<th>
+					申请贷款金额
+				</th>
+				<th>
+					流程标识
+				</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户1</td>
+					<td>客户经理1</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户2</td>
+					<td>客户经理2</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>3</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户3</td>
+					<td>客户经理3</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>4</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户4</td>
+					<td>客户经理4</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户5</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户5</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户5</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户5</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户5</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+						<tr>
+					<td>5</td>
+					<td>文档审核</td>
+					<td>KH0001</td>
+					<td>2016-01-01</td>
+					<td>5天4小时12分</td>
+					<td>现金贷</td>
+					<td>经营贷</td>
+					<td>客户5</td>
+					<td>客户经理5</td>
+					<td>10000</td>
+					<td>贷款申请</td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>
+		
+		<!--分页信息-->
+		<div id="pagnation">
+			<p>共1页，7条记录</p>
+			<p class="pageHtml">
+				<span>上一页</span> <span style="border-left: none;"> 1</span> <span
+					style="border-left: none;">下一页</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
